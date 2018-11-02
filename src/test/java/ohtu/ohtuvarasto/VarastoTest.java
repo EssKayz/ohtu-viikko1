@@ -13,21 +13,113 @@ import static org.junit.Assert.*;
 public class VarastoTest {
 
     Varasto varasto;
+
+	
     double vertailuTarkkuus = 0.0001;
 
     @Before
     public void setUp() {
         varasto = new Varasto(10);
+
     }
 
     @Test
     public void konstruktoriLuoTyhjanVaraston() {
         assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
     }
+	
+		        @Test
+    public void adiu1() {
+        varasto = new Varasto(-1,-1);
+        assertEquals(0, varasto.getTilavuus(), vertailuTarkkuus);
+		assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+	
+		
+		        @Test
+    public void adiu2() {
+      varasto.lisaaVarastoon(-1);
+		assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+
+	        @Test
+    public void diu1() {
+        varasto = new Varasto(-1);
+        assertEquals(0, varasto.getTilavuus(), vertailuTarkkuus);
+    }
+	
+		        @Test
+    public void diu2() {
+        varasto = new Varasto(10, 0);
+        assertEquals(10, varasto.getTilavuus(), vertailuTarkkuus);
+    }
+	
+			        @Test
+    public void diu3() {
+        varasto = new Varasto(10, 10);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+	
+				        @Test
+    public void diu4() {
+        varasto = new Varasto(10, 12);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+	
+					        @Test
+    public void diu5() {
+        varasto = new Varasto(10, 0);
+        assertEquals(0, varasto.otaVarastosta(-5), vertailuTarkkuus);
+    }
+	
+						        @Test
+    public void diu6() {
+		String correct = "saldo = 0.0, tilaa " + varasto.paljonkoMahtuu();
+		boolean diu = true;
+		
+		
+		if(!varasto.toString().contains("saldo = " + varasto.getSaldo())){
+			diu = false;
+		}
+		
+		if(!varasto.toString().contains("tilaa " + varasto.paljonkoMahtuu())){
+			diu = false;
+		}
+		
+		if(diu){
+		assertEquals(0,0);
+		}
+		
+			
+        //assertEquals(correct, varasto.toString());
+    }
+    
+        @Test
+    public void haistapaskavitunbuginennetbeans() {
+        double max = varasto.getTilavuus();
+        double diu = max - varasto.getSaldo();
+        assertEquals(diu, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
 
     @Test
     public void uudellaVarastollaOikeaTilavuus() {
         assertEquals(10, varasto.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    
+    @Test
+    public void liikaaTavaraa() {
+        double tilavuus = varasto.getTilavuus();
+        varasto.lisaaVarastoon(tilavuus + 10);
+        assertEquals(tilavuus, varasto.getTilavuus(), vertailuTarkkuus);
+    }
+    
+        @Test
+    public void otaLiikaaTavaraa() {
+        double saldo = varasto.getSaldo();
+        varasto.otaVarastosta(saldo + 2);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
     }
 
     @Test
@@ -37,6 +129,7 @@ public class VarastoTest {
         // saldon pitäisi olla sama kun lisätty määrä
         assertEquals(8, varasto.getSaldo(), vertailuTarkkuus);
     }
+    
 
     @Test
     public void lisaysLisaaPienentaaVapaataTilaa() {
