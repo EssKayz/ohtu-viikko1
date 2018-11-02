@@ -43,5 +43,5 @@ jacocoTestReport {
 }
 
 // Define the main class for the application
-mainClassName = 'ohtu.ohtuvarasto.Main'
+mainClassName = 'main.Main'
 
