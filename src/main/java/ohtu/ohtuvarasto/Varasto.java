@@ -1,8 +1,7 @@
 package ohtu.ohtuvarasto;
 
-
-
 public class Varasto {
+
     private double minimi;
     // --- piilotettu tietorakenteen toteutus: ---
     private double tilavuus;  // paljonko varastoon mahtuu,  > 0
@@ -27,7 +26,7 @@ public class Varasto {
             this.saldo = minimi;
             return;
         }
-        this.saldo=minimi;
+        this.saldo = minimi;
         lisaaVarastoon(alkuSaldo);
     }
 
@@ -46,15 +45,15 @@ public class Varasto {
 
     // --- asettavat aksessorit eli setterit: ---
     public void lisaaVarastoon(double maara) {
-        if (maara < 0){
+        if (maara < 0) {
             return;       // tällainen pikapoistuminenkin!
         }
-		
-        if (maara <= paljonkoMahtuu()){
+
+        if (maara <= paljonkoMahtuu()) {
             saldo = saldo + maara;
-	} else {
+        } else {
             saldo = tilavuus;  // täyteen ja ylimäärä hukkaan!
-	}
+        }
     }
 
     public double otaVarastosta(double maara) {
