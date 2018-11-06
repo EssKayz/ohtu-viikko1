@@ -42,6 +42,12 @@ jacocoTestReport {
     }
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
+
 // Define the main class for the application
 mainClassName = 'main.Main'
 
