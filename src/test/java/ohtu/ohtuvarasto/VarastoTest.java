@@ -74,15 +74,17 @@ public class VarastoTest {
     public void diu6() {
         String correct = "saldo = 0.0, tilaa " + varasto.paljonkoMahtuu();
         boolean diu = true;
+        
         if (!varasto.toString().contains("saldo = " + varasto.getSaldo())) {
             diu = false;
         }
+        
         if (!varasto.toString().contains("tilaa " + varasto.paljonkoMahtuu())) {
             diu = false;
         }
-        if (diu) {
-            assertEquals(0, 0);
-        }
+        
+        assertEquals(true, diu);
+        
     }
 
     @Test
